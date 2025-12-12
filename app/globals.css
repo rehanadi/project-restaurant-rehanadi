@@ -69,10 +69,7 @@
   --color-neutral-900: #181d27;
   --color-neutral-950: #0a0d12;
 
-  --color-primary-100: #e5f4fb;
-  --color-primary-200: #6fcfff;
-  --color-primary-300: #0093dd;
-  --color-primary-400: #050a1b;
+  --color-primary-100: #C12116;
 
   --color-accent-red: #D9206E;
   --color-accent-green: #079455;
@@ -193,13 +190,13 @@ html {
 body {
   @apply bg-white text-sm font-normal text-neutral-950;
 
-  font-family: var(--font-poppins);
+  font-family: var(--font-nunito);
 }
 
 @layer components {
   .custom-container {
     margin: 0 auto;
-    @apply max-w-302 pr-6 pl-6;
+    @apply max-w-300 px-4;
   }
 }
 
