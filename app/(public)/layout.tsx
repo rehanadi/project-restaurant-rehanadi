@@ -1,3 +1,4 @@
+import Footer from "@/features/shared/components/footer";
 import Header from "@/features/shared/components/header";
 
 interface PublicLayoutProps {
@@ -9,6 +10,7 @@ const PublicLayout = ({ children }: PublicLayoutProps) => {
     <>
       <Header />
       <main>{children}</main>
+      <Footer />
     </>
   );
 };

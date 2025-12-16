@@ -1,18 +1,33 @@
 export interface LogoConfig {
   size?: 'small' | 'large';
+  variant?: 'dark' | 'light';
   width?: number;
   height?: number;
 }
 
 export const logoConfigs = {
   large: {
-    image: '/icons/logo.svg',
-    width: 149,
-    height: 42,
+    dark: {
+      image: '/icons/logo/logo-dark.svg',
+      width: 149,
+      height: 42,
+    },
+    light: {
+      image: '/icons/logo/logo-light.svg',
+      width: 149,
+      height: 42,
+    },
   },
   small: {
-    image: '/icons/logo-small.svg',
-    width: 40,
-    height: 40,
+    dark: {
+      image: '/icons/logo/logo-small.svg',
+      width: 40,
+      height: 40,
+    },
+    light: {
+      image: '/icons/logo/logo-small.svg',
+      width: 40,
+      height: 40,
+    },
   },
 };
