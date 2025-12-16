@@ -4,14 +4,16 @@ import { categoryData } from "@/features/categories/constants/category-data";
 
 const Categories = () => {
   return (
-    <CategoryList>
-      {categoryData.map((category) => (
-        <CategoryItem
-          key={category.id}
-          category={category}
-        />
-      ))}
-    </CategoryList>
+    <div className="custom-container w-full">
+      <CategoryList>
+        {categoryData.map((category) => (
+          <CategoryItem
+            key={category.id}
+            category={category}
+          />
+        ))}
+      </CategoryList>
+    </div>
   );
 };
 

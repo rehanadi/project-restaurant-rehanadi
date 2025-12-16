@@ -71,6 +71,8 @@
 
   --color-primary-100: #C12116;
 
+  --color-yellow-500: #FFAB0D;
+
   --color-accent-red: #D9206E;
   --color-accent-green: #079455;
   --color-accent-yellow: #FDB022;
@@ -212,6 +214,11 @@ body {
 
   .flex-start {
     @apply flex items-center justify-start;
+  }
+
+  /* shadow */
+  .shadow-light {
+    box-shadow: 0px 0px 20px 0px rgba(200, 196, 202, 0.25);
   }
 }
 

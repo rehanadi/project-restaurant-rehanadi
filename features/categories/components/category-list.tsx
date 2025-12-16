@@ -6,7 +6,7 @@ interface CategoryListProps {
 
 const CategoryList = ({ children }: CategoryListProps) => {
   return (
-    <div className="custom-container flex w-full flex-wrap items-start justify-start gap-5 md:gap-[46.8px]">
+    <div className="w-full flex flex-wrap items-start justify-start gap-5 md:gap-[46.8px]">
       {children}
     </div>
   );
