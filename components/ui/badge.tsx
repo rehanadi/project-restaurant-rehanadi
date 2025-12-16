@@ -1,0 +1,56 @@
+import * as React from 'react';
+import { Slot } from '@radix-ui/react-slot';
+import { cva, type VariantProps } from 'class-variance-authority';
+
+import { cn } from '@/lib/utils';
+
+const badgeVariants = cva(
+  'inline-flex items-center justify-center rounded-sm border px-2 text-sm font-semibold w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden h-10 md:h-11.5',
+  {
+    variants: {
+      variant: {
+        default:
+          'border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90',
+        secondary:
+          'border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90',
+        destructive:
+          'border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
+        outline:
+          'text-neutral-950 [a&]:hover:bg-accent [a&]:hover:text-accent-foreground border-neutral-300',
+        'outline-rounded':
+          'md:text-md rounded-full border border-neutral-300 px-4 py-2 text-neutral-950 text-sm font-semibold transition-colors hover:text-primary-300 hover:border-primary-300',
+        'info-rounded':
+          'md:text-md rounded-full border border-primary-300 px-4 py-2 text-primary-300 text-sm font-semibold',
+        'danger-rounded':
+          'md:text-md rounded-full bg-danger-100 border border-primary-100 px-4 py-2 text-primary-100 text-sm font-semibold',
+        success:
+          'bg-[#24A5000D] rounded-xs px-2 text-[#24A500] text-sm font-bold border-none',
+        danger:
+          'bg-[#EE1D521A] rounded-xs px-2 text-[#EE1D52] text-sm font-bold border-none',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  }
+);
+
+function Badge({
+  className,
+  variant,
+  asChild = false,
+  ...props
+}: React.ComponentProps<'span'> &
+  VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
+  const Comp = asChild ? Slot : 'span';
+
+  return (
+    <Comp
+      data-slot='badge'
+      className={cn(badgeVariants({ variant }), className)}
+      {...props}
+    />
+  );
+}
+
+export { Badge, badgeVariants };
