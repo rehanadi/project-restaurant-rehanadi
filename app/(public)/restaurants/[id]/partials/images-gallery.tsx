@@ -9,7 +9,7 @@ const ImagesGallery = ({ className }: ImagesGalleryProps) => {
   return (
     <div className={cn('grid grid-cols-4 gap-5', className)}>
       {/* Image 1 */}
-      <div className="col-span-2 row-span-3 relative w-full overflow-hidden rounded-2xl cursor-pointer">
+      <div className="col-span-2 row-span-3 relative w-full overflow-hidden rounded-2xl">
         <Image
           src="/images/menus/menu-1.png"
           alt="Menu 1"
@@ -19,7 +19,7 @@ const ImagesGallery = ({ className }: ImagesGalleryProps) => {
       </div>
 
       {/* Image 2 */}
-      <div className="col-span-2 row-span-2 relative w-full min-h-[302px] overflow-hidden rounded-2xl cursor-pointer">
+      <div className="col-span-2 row-span-2 relative w-full min-h-[302px] overflow-hidden rounded-2xl">
         <Image
           src="/images/menus/menu-2.png"
           alt="Menu 2"
@@ -29,7 +29,7 @@ const ImagesGallery = ({ className }: ImagesGalleryProps) => {
       </div>
 
       {/* Image 3 */}
-      <div className="relative w-full min-h-[148px] overflow-hidden rounded-2xl cursor-pointer">
+      <div className="relative w-full min-h-[148px] overflow-hidden rounded-2xl">
         <Image
           src="/images/menus/menu-3.png"
           alt="Menu 3"
@@ -39,7 +39,7 @@ const ImagesGallery = ({ className }: ImagesGalleryProps) => {
       </div>
 
       {/* Image 4 */}
-      <div className="relative w-full min-h-[148px] overflow-hidden rounded-2xl cursor-pointer">
+      <div className="relative w-full min-h-[148px] overflow-hidden rounded-2xl">
         <Image
           src="/images/menus/menu-4.png"
           alt="Menu 4"

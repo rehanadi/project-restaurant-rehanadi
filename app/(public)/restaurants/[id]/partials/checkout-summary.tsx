@@ -1,0 +1,34 @@
+import { Button } from "@/components/ui/button";
+import { Icon } from "@iconify/react";
+
+const CheckoutSummary = () => {
+  return (
+    <div className="shadow-light fixed bottom-0 inset-x-0 bg-white">
+      <div className="custom-container w-full h-16 md:h-20 flex-between gap-4">
+        <div className="flex flex-col gap-0.5">
+          <div className="flex-start gap-1 md:gap-2">
+            <Icon
+              icon='lets-icons:bag-fill'
+              className='size-5 md:size-6'
+            />
+            <span className="text-sm md:text-md">
+              5 Items
+            </span>
+          </div>
+
+          <span className="font-extrabold text-md md:text-xl">
+            Rp200.000
+          </span>
+        </div>
+
+        <Button
+          className="w-40 md:w-57.6 h-10 md:h-11"
+        >
+          Checkout
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export default CheckoutSummary;
