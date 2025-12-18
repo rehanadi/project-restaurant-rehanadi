@@ -1,10 +1,18 @@
-import React from 'react'
+import Section from "@/components/layouts/section";
+import CartList from "@/features/cart/components/cart-list";
+import CartItem from "@/features/cart/components/cart-item";
 
 const CartPage = () => {
   return (
-    <div className="custom-container w-full pt-4 pb-10 flex flex-col gap-4">
-      
-    </div>
+    <Section
+      title="My Cart"
+      className="max-w-200"
+    >
+      <CartList>
+        <CartItem />
+        <CartItem />
+      </CartList>
+    </Section>
   );
 };
 
