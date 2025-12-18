@@ -27,7 +27,10 @@ const Header = () => {
 
           <div className="flex-center gap-4">
             <Avatar className='size-10 md:size-12'>
-              <AvatarImage src='/images/avatar.png' />
+              <AvatarImage
+                src='/images/avatar.png'
+                className="rounded-full"
+              />
               <AvatarFallback>
                 U
               </AvatarFallback>

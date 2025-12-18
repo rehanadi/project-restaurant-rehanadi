@@ -1,3 +1,4 @@
+import React from "react";
 import Footer from "@/features/shared/components/footer";
 import Header from "@/features/shared/components/header";
 

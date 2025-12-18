@@ -13,7 +13,10 @@ const ReviewItem = ({
     <div className="shadow-light bg-white p-4 rounded-2xl flex flex-col gap-4">
       <div className="flex-start gap-3">
         <Avatar className='size-14.5 md:gap-16'>
-          <AvatarImage src={review.user.avatar} />
+          <AvatarImage
+            src={review.user.avatar}
+            className="rounded-full"
+          />
           <AvatarFallback>
             {review.user.name.charAt(0)}
           </AvatarFallback>
