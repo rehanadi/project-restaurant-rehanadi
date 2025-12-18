@@ -1,10 +1,12 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import SummaryItem from "@/features/checkout/components/summary-item";
 
 const PaymentSummary = () => {
   return (
     <div className="px-4 md:px-5 flex flex-col gap-4">
-      <h2 className="pt-2 border-t border-dashed border-neutral-300 font-extrabold text-md md:text-lg">
+      <h2 className="font-extrabold text-md md:text-lg">
         Payment Summary
       </h2>
 

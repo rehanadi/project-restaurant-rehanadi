@@ -6,8 +6,22 @@ import CheckoutItems from "./partials/checkout-items";
 import PaymentMethod from "./partials/payment-method";
 import PaymentSummary from "./partials/payment-summary";
 import CheckoutContainer from "./partials/checkout-container";
+import CheckoutSuccess from "@/features/checkout/components/checkout-success";
+import { Separator } from "@/components/ui/separator";
 
 const CheckoutPage = () => {
+  const isSuccess = false;
+
+  if (isSuccess) {
+    return (
+      <Section
+        className="max-w-107 pt-8 md:pt-24"
+      >
+        <CheckoutSuccess />
+      </Section>
+    );
+  }
+
   return (
     <Section
       title="Checkout"
@@ -23,6 +37,7 @@ const CheckoutPage = () => {
         sidebar={
           <>
             <PaymentMethod />
+            <Separator variant="dashed" />
             <PaymentSummary />
           </>
         }

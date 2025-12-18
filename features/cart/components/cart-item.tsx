@@ -3,6 +3,7 @@ import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import CartMenuItem from "./cart-menu-item";
+import { Separator } from "@/components/ui/separator";
 
 const CartItem = () => {
   return (
@@ -28,7 +29,9 @@ const CartItem = () => {
       <CartMenuItem />
       <CartMenuItem />
 
-      <div className="pt-2 md:pt-2.5 border-t border-dashed border-neutral-300 flex flex-col md:flex-row md:justify-between md:items-center gap-3">
+      <Separator variant="dashed" />
+
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3">
         <div className="flex flex-col">
           <span className="font-medium text-sm md:text-md">
             Total
