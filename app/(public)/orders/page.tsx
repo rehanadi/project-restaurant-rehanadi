@@ -84,6 +84,7 @@ const OrdersPage = () => {
 
           <OrderList>
             <OrderItem />
+            <OrderItem />
           </OrderList>
         </div>
       </Section>
