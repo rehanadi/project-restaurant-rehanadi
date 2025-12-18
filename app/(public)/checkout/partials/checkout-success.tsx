@@ -1,7 +1,9 @@
+"use client";
+
+import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import Logo from "@/features/shared/components/logo";
-import Image from "next/image";
-import SummaryItem from "./summary-item";
+import SummaryItem from "@/features/checkout/components/summary-item";
 import { Button } from "@/components/ui/button";
 
 const CheckoutSuccess = () => {

@@ -6,7 +6,7 @@ import CheckoutItems from "./partials/checkout-items";
 import PaymentMethod from "./partials/payment-method";
 import PaymentSummary from "./partials/payment-summary";
 import CheckoutContainer from "./partials/checkout-container";
-import CheckoutSuccess from "@/features/checkout/components/checkout-success";
+import CheckoutSuccess from "./partials/checkout-success";
 import { Separator } from "@/components/ui/separator";
 
 const CheckoutPage = () => {

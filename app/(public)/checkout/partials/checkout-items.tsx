@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import CartMenuItem from "@/features/cart/components/cart-menu-item";
 import Image from "next/image";
