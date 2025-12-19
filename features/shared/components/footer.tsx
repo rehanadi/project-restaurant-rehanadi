@@ -13,7 +13,13 @@ const Footer = () => {
       <div className="custom-container w-full py-10 md:py-20 flex flex-wrap justify-between gap-6">
         <div className="basis-full md:basis-[380px] flex flex-col gap-4 md:gap-10">
           <div className="flex flex-col gap-5.5">
-            <Logo variant="light" />
+            <Link
+              href="/"
+              className="self-start"
+            >
+              <Logo variant="light" />
+            </Link>
+
             <p className="text-sm md:text-md">
               Enjoy homemade flavors & chef’s signature dishes, freshly prepared every day. Order online or visit our nearest branch.
             </p>
@@ -41,7 +47,7 @@ const Footer = () => {
             <Link
               key={index}
               href={link.href}
-              className="text-neutral-25 text-sm md:text-md hover:underline transition"
+              className="text-neutral-25 text-sm md:text-md hover:text-neutral-300 transition"
             >
               {link.label}
             </Link>
@@ -57,7 +63,7 @@ const Footer = () => {
             <Link
               key={index}
               href={link.href}
-              className="text-neutral-25 text-sm md:text-md hover:underline transition"
+              className="text-neutral-25 text-sm md:text-md hover:text-neutral-300 transition"
             >
               {link.label}
             </Link>

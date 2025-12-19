@@ -6,7 +6,13 @@ import {
 } from '@/features/shared/configs/logo-config';
 import Image from 'next/image';
 
-const Logo = ({ size = 'large', variant = 'dark', width, height }: LogoConfig) => {
+const Logo = ({
+  size = 'large',
+  variant = 'dark',
+  width,
+  height,
+  className
+}: LogoConfig & { className?: string }) => {
   const logoConfig = logoConfigs[size][variant];
 
   return (
@@ -15,6 +21,7 @@ const Logo = ({ size = 'large', variant = 'dark', width, height }: LogoConfig) =
       alt='Logo'
       width={width ?? logoConfig.width}
       height={height ?? logoConfig.height}
+      className={className}
     />
   );
 };

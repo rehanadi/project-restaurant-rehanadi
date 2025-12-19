@@ -27,7 +27,7 @@ const Menu = () => {
       <nav className="flex flex-col gap-6">
         <Link
           href="/"
-          className="flex-start gap-2"
+          className="flex-start gap-2 hover:text-primary-100 transition-colors"
         >
           <MapPin className="size-6" />
           <span className="font-medium text-md">
@@ -37,7 +37,7 @@ const Menu = () => {
 
         <Link
           href="/"
-          className="flex-start gap-2 text-primary-100"
+          className="flex-start gap-2 hover:text-primary-100 transition-colors"
         >
           <FileText className="size-6" />
           <span className="font-medium text-md">
@@ -47,7 +47,7 @@ const Menu = () => {
 
         <Link
           href="/"
-          className="flex-start gap-2"
+          className="flex-start gap-2 hover:text-primary-100 transition-colors"
         >
           <CircleArrowLeft className="size-6" />
           <span className="font-medium text-md">
