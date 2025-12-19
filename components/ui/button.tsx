@@ -16,7 +16,7 @@ const buttonVariants = cva(
         danger:
           'bg-white font-bold text-sm md:text-md border border-neutral-300 text-danger-500 rounded-full hover:bg-neutral-100 transition-colors',
         secondary:
-          'bg-transparent hover:bg-neutral-100 border border-neutral-300 rounded-lg text-md font-medium',
+          'bg-white font-bold text-sm md:text-md text-neutral-950 rounded-full hover:bg-neutral-300 transition-colors',
         ghost:
           'bg-transparent border border-transparent hover:bg-neutral-100 hover:border hover:border-neutral-300 rounded-lg text-md font-medium',
       },

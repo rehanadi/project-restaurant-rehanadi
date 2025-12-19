@@ -2,8 +2,11 @@ import Link from "next/link"
 import ResponsiveLogo from "./responsive-logo"
 import { Icon } from '@iconify/react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
+  const isAuthenticated = true;
+
   return (
     <header className="shadow-light sticky inset-x-0 top-0 z-50 h-16 w-full gap-4 bg-white md:h-20">
       <div className="custom-container flex-between h-full gap-4">
@@ -11,36 +14,58 @@ const Header = () => {
           <ResponsiveLogo />
         </Link>
 
-        <div className="flex-center gap-6">
-          <Link
-            href='/cart'
-            className="relative"
-          >
-            <Icon
-              icon='lets-icons:bag-fill'
-              className='size-7 md:size-8'
-            />
-              <div className='bg-primary-100 flex-center text-xs-bold absolute -top-1 -right-1 size-5 rounded-full text-white'>
-                5
-              </div>
-          </Link>
-
+        {isAuthenticated ? (
           <div className="flex-center gap-4">
-            <Avatar className='size-10 md:size-12'>
-              <AvatarImage
-                src='/images/avatar.png'
-                className="rounded-full"
-              />
-              <AvatarFallback>
-                U
-              </AvatarFallback>
-            </Avatar>
-
-            <span className="hidden md:inline font-semibold text-lg">
-              John Doe
-            </span>
+            <Button
+              variant="outline"
+              className="w-[163px]"
+              asChild
+            >
+              <Link href='/login'>
+                Sign In
+              </Link>
+            </Button>
+            <Button
+              className="w-[163px]"
+              asChild
+            >
+              <Link href='/register'>
+                Sign Up
+              </Link>
+            </Button>
           </div>
-        </div>
+        ) : (
+          <div className="flex-center gap-6">
+            <Link
+              href='/cart'
+              className="relative"
+            >
+              <Icon
+                icon='lets-icons:bag-fill'
+                className='size-7 md:size-8'
+              />
+                <div className='bg-primary-100 flex-center text-xs-bold absolute -top-1 -right-1 size-5 rounded-full text-white'>
+                  5
+                </div>
+            </Link>
+  
+            <div className="flex-center gap-4">
+              <Avatar className='size-10 md:size-12'>
+                <AvatarImage
+                  src='/images/avatar.png'
+                  className="rounded-full"
+                />
+                <AvatarFallback>
+                  U
+                </AvatarFallback>
+              </Avatar>
+  
+              <span className="hidden md:inline font-semibold text-lg">
+                John Doe
+              </span>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   )
