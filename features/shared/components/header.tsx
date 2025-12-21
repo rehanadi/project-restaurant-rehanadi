@@ -8,7 +8,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X } from "lucide-react";
+import { LogOut, Menu, User, X } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const isAuthenticated = true;
@@ -36,21 +37,51 @@ const Header = () => {
                 </div>
             </Link>
   
-            <div className="flex-center gap-4">
-              <Avatar className='size-10 md:size-12'>
-                <AvatarImage
-                  src='/images/avatar.png'
-                  className="rounded-full"
-                />
-                <AvatarFallback>
-                  U
-                </AvatarFallback>
-              </Avatar>
-  
-              <span className="hidden md:inline font-semibold text-lg">
-                John Doe
-              </span>
-            </div>
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <div className="flex-center gap-4 cursor-pointer">
+                  <Avatar className='size-10 md:size-12'>
+                    <AvatarImage
+                      src='/images/avatar.png'
+                      className="rounded-full"
+                    />
+                    <AvatarFallback>
+                      U
+                    </AvatarFallback>
+                  </Avatar>
+      
+                  <span className="hidden md:inline font-semibold text-lg">
+                    John Doe
+                  </span>
+                </div>
+              </DropdownMenuTrigger>
+
+              <DropdownMenuContent align="end" className="w-56">
+                <div className="px-2 py-3">
+                  <p className="font-semibold text-md">John Doe</p>
+                </div>
+
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/profile"
+                    className="flex items-center gap-2 cursor-pointer"
+                  >
+                    <User className="size-4" />
+                    <span>Profile</span>
+                  </Link>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem
+                  onClick={() => {}}
+                  variant="destructive"
+                  className="cursor-pointer"
+                >
+                  <LogOut className="size-4" />
+                  <span>Logout</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         ) : (
           <>
