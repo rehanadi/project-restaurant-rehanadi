@@ -1,5 +1,3 @@
-"use client";
-
 import RestaurantList from "@/features/restaurants/components/restaurant-list";
 import Link from "next/link";
 import RestaurantItem from "@/features/restaurants/components/restaurant-item";
