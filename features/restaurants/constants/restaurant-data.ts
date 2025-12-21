@@ -1,6 +1,4 @@
-import { Restaurant } from "../types";
-
-export const restaurantData: Restaurant[] = [
+export const restaurantData: any[] = [
   {
     "id": 296,
     "name": "Richeese Factory",

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { restaurantsService } from './services';
-import { useAppDispatch } from '@/lib/hooks';
-import { setRecommendations } from './stores';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { setRecommendations, setSelectedRestaurant } from './stores';
 import { CACHE_DURATION } from '@/features/shared/constants/duration';
 
 export const useGetRecommendedRestaurants = () => {
@@ -16,5 +16,22 @@ export const useGetRecommendedRestaurants = () => {
     },
     staleTime: CACHE_DURATION,
     gcTime: CACHE_DURATION,
+  });
+};
+
+export const useGetRestaurant = (id: number) => {
+  const dispatch = useAppDispatch();
+  const { menuLimit, reviewLimit } = useAppSelector((state) => state.restaurants);
+
+  return useQuery({
+    queryKey: ['restaurant', id, menuLimit, reviewLimit],
+    queryFn: async () => {
+      const response = await restaurantsService.getRestaurant(id, menuLimit, reviewLimit);
+      dispatch(setSelectedRestaurant(response.data));
+      return response;
+    },
+    staleTime: CACHE_DURATION,
+    gcTime: CACHE_DURATION,
+    enabled: !!id,
   });
 };
