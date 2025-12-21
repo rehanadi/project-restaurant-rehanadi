@@ -20,6 +20,7 @@ export const useGetCart = () => {
     staleTime: CACHE_DURATION,
     gcTime: CACHE_DURATION,
     enabled: isAuthenticated,
+    refetchOnMount: 'always',
   });
 };
 
