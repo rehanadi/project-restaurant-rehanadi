@@ -22,9 +22,15 @@ const RestaurantMenus = () => {
       return selectedRestaurant.menus;
     }
     
-    return selectedRestaurant.menus.filter(
-      (menu) => menu.type.toLowerCase() === selectedType.toLowerCase()
-    );
+    if (selectedType === 'Food') {
+      return selectedRestaurant.menus.filter((menu) => menu.type === 'food');
+    }
+    
+    if (selectedType === 'Drink') {
+      return selectedRestaurant.menus.filter((menu) => menu.type === 'drink');
+    }
+    
+    return selectedRestaurant.menus;
   }, [selectedRestaurant, selectedType]);
 
   const hasMore = selectedRestaurant ? menuLimit < selectedRestaurant.totalMenus : false;
