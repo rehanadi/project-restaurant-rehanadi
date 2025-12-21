@@ -18,13 +18,17 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useAppSelector, useAppDispatch } from '@/lib/hooks';
 import { logout } from '@/features/auth/stores';
+import { useGetCart } from '@/features/cart/hooks';
 
 const Header = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { isAuthenticated, user } = useAppSelector((state) => state.auth);
+  const { summary } = useAppSelector((state) => state.cart);
   const [showMenu, setShowMenu] = useState(false);
   const [mounted, setMounted] = useState(false);
+
+  useGetCart();
 
   useEffect(() => {
     setMounted(true);
@@ -63,9 +67,11 @@ const Header = () => {
           <div className="flex-center gap-6">
             <Link href="/cart" className="relative">
               <Icon icon="lets-icons:bag-fill" className="size-7 md:size-8" />
-              <div className="bg-primary-100 flex-center text-xs-bold absolute -top-1 -right-1 size-5 rounded-full text-white">
-                5
-              </div>
+              {summary.totalItems > 0 && (
+                <div className="bg-primary-100 flex-center text-xs-bold absolute -top-1 -right-1 size-5 rounded-full text-white">
+                  {summary.totalItems}
+                </div>
+              )}
             </Link>
 
             <DropdownMenu>
