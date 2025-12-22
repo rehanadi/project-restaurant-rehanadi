@@ -40,9 +40,9 @@ const Menu = () => {
 
       <nav className="flex flex-col gap-6">
         <Link
-          href="/delivery-address"
+          href="/address"
           className={`flex-start gap-2 hover:text-primary-100 transition-colors ${
-            isActive('/delivery-address') ? 'text-primary-100' : ''
+            isActive('/address') ? 'text-primary-100' : ''
           }`}
         >
           <MapPin className="size-6" />

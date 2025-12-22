@@ -9,7 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
-import { LogOut, Menu, User, X } from 'lucide-react';
+import { FileText, LogOut, MapPin, Menu, User, X } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,6 +19,7 @@ import {
 import { useAppSelector, useAppDispatch } from '@/lib/hooks';
 import { logout } from '@/features/auth/stores';
 import { useGetCart } from '@/features/cart/hooks';
+import { Separator } from "@/components/ui/separator";
 
 const Header = () => {
   const router = useRouter();
@@ -88,18 +89,49 @@ const Header = () => {
                 </div>
               </DropdownMenuTrigger>
 
-              <DropdownMenuContent align="end" className="w-56">
-                <div className="px-2 py-3">
-                  <p className="font-semibold text-md">{userName}</p>
+              <DropdownMenuContent align="end" className="w-[197px]">
+                <div className="pb-3 flex-start gap-2">
+                  <Avatar className='size-9'>
+                    <AvatarImage
+                      src={userAvatar}
+                      className="rounded-full"
+                    />
+                    <AvatarFallback>
+                      U
+                    </AvatarFallback>
+                  </Avatar>
+                  <p className="font-bold text-md">{userName}</p>
                 </div>
+
+                <Separator className="mb-3" />
 
                 <DropdownMenuItem asChild>
                   <Link
                     href="/profile"
                     className="flex items-center gap-2 cursor-pointer"
                   >
-                    <User className="size-4" />
-                    <span>Profile</span>
+                    <User className="size-5" />
+                    <span className="font-medium text-sm">Profile</span>
+                  </Link>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/address"
+                    className="flex items-center gap-2 cursor-pointer"
+                  >
+                    <MapPin className="size-5" />
+                    <span className="font-medium text-sm">Delivery Address</span>
+                  </Link>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/orders"
+                    className="flex items-center gap-2 cursor-pointer"
+                  >
+                    <FileText className="size-5" />
+                    <span className="font-medium text-sm">My Orders</span>
                   </Link>
                 </DropdownMenuItem>
 
@@ -108,8 +140,8 @@ const Header = () => {
                   variant="destructive"
                   className="cursor-pointer"
                 >
-                  <LogOut className="size-4" />
-                  <span>Logout</span>
+                  <LogOut className="size-5" />
+                  <span className="font-medium text-sm">Logout</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

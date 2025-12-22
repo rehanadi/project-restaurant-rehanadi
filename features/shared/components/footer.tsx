@@ -47,7 +47,7 @@ const Footer = () => {
             <Link
               key={index}
               href={link.href}
-              className="text-neutral-25 text-sm md:text-md hover:text-neutral-300 transition"
+              className="text-neutral-25 text-sm md:text-md hover:text-neutral-400 transition"
             >
               {link.label}
             </Link>
@@ -63,7 +63,7 @@ const Footer = () => {
             <Link
               key={index}
               href={link.href}
-              className="text-neutral-25 text-sm md:text-md hover:text-neutral-300 transition"
+              className="text-neutral-25 text-sm md:text-md hover:text-neutral-400 transition"
             >
               {link.label}
             </Link>
@@ -79,7 +79,7 @@ export default Footer;
 const SocialMediaIcon = ({ name, icon, link, width, height }: SocialMediaData) => {
   return (
     <Link href={link}>
-      <div className='flex-center size-10 rounded-full border border-neutral-800 transition hover:bg-neutral-700'>
+      <div className='flex-center size-10 rounded-full border border-neutral-800 transition hover:bg-neutral-800'>
         <Image
           src={icon}
           alt={name}
