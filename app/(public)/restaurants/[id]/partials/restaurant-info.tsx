@@ -1,14 +1,27 @@
 'use client';
 
+import { useMemo } from 'react';
 import Image from 'next/image';
 import Rating from '@/features/shared/components/rating';
 import { Button } from '@/components/ui/button';
 import { Share2 } from 'lucide-react';
 import { useAppSelector } from '@/lib/hooks';
 import { Skeleton } from '@/components/ui/skeleton';
+import { calculateDistance } from '@/features/restaurants/utils';
 
 const RestaurantInfo = () => {
   const { selectedRestaurant } = useAppSelector((state) => state.restaurants);
+  const { latitude, longitude } = useAppSelector((state) => state.location);
+
+  const distance = useMemo(() => {
+    if (!selectedRestaurant || !latitude || !longitude) return null;
+    return calculateDistance(
+      latitude,
+      longitude,
+      selectedRestaurant.coordinates.lat,
+      selectedRestaurant.coordinates.long
+    );
+  }, [selectedRestaurant, latitude, longitude]);
 
   if (!selectedRestaurant) {
     return (
@@ -49,8 +62,12 @@ const RestaurantInfo = () => {
 
           <div className="flex-start gap-1.5 md:font-medium text-sm md:text-lg">
             <span>{selectedRestaurant.place}</span>
-            <div className="size-0.5 bg-neutral-950 rounded-full"></div>
-            <span>2.4 km</span>
+            {distance !== null && (
+              <>
+                <div className="size-0.5 bg-neutral-950 rounded-full"></div>
+                <span>{distance} km</span>
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@ interface RestaurantItemProps {
 const RestaurantItem = ({ restaurant, showDistance = false }: RestaurantItemProps) => {
   return (
     <Link href={`/restaurants/${restaurant.id}`}>
-      <div className="shadow-light bg-white p-3 md:p-4 rounded-2xl flex-start gap-2 md:gap-3">
+      <div className="shadow-light bg-white p-3 md:p-4 rounded-2xl flex-start gap-2 md:gap-3 hover:shadow-lg transition-shadow duration-300">
         <div className="shrink-0 size-22.5 md:size-30 aspect-square rounded-xl relative overflow-hidden">
           <Image src={restaurant.logo} alt={restaurant.name} fill className="object-cover object-center" />
         </div>
