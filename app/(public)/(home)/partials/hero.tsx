@@ -1,7 +1,12 @@
-import { Input } from "@/components/ui/input";
+import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
 
-const Hero = () => {
+interface HeroProps {
+  searchQuery: string;
+  onSearchChange: (value: string) => void;
+}
+
+const Hero = ({ searchQuery, onSearchChange }: HeroProps) => {
   return (
     <div
       className="h-screen flex-center relative"
@@ -13,14 +18,14 @@ const Hero = () => {
       }}
     >
       {/* Gradient Overlay */}
-      <div 
+      <div
         className="absolute inset-0 z-0"
         style={{
           background: 'linear-gradient(180deg, #000000 0%, #000000 80%, transparent 100%)',
           opacity: 0.6,
         }}
       />
-      
+
       <div className="custom-container max-w-[712px] flex flex-col items-center gap-6 md:gap-10 relative z-10">
         <div className="flex flex-col items-center gap-1 md:gap-2">
           <h1 className="text-center text-white font-extrabold text-display-lg md:text-display-2xl">
@@ -36,11 +41,13 @@ const Hero = () => {
             type="text"
             placeholder="Search restaurants, food and drink"
             className="flex-1 p-0 border-0 outline-0 focus:outline-0 text-sm md:text-md placeholder:text-neutral-600"
+            value={searchQuery}
+            onChange={(e) => onSearchChange(e.target.value)}
           />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

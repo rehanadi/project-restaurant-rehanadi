@@ -38,6 +38,14 @@ const initialState: RestaurantsState = {
     total: 0,
     totalPages: 0,
   },
+  searchResults: [],
+  searchPagination: {
+    page: 1,
+    limit: 6,
+    total: 0,
+    totalPages: 0,
+  },
+  searchQuery: '',
 };
 
 const restaurantsSlice = createSlice({
@@ -109,6 +117,28 @@ const restaurantsSlice = createSlice({
         totalPages: 0,
       };
     },
+    setSearchResults: (
+      state,
+      action: PayloadAction<{
+        restaurants: Restaurant[];
+        pagination: RestaurantPagination;
+        searchQuery: string;
+      }>
+    ) => {
+      state.searchResults = action.payload.restaurants;
+      state.searchPagination = action.payload.pagination;
+      state.searchQuery = action.payload.searchQuery;
+    },
+    clearSearchResults: (state) => {
+      state.searchResults = [];
+      state.searchPagination = {
+        page: 1,
+        limit: 6,
+        total: 0,
+        totalPages: 0,
+      };
+      state.searchQuery = '';
+    },
   },
 });
 
@@ -126,5 +156,7 @@ export const {
   resetNearby,
   setBestSellers,
   resetBestSellers,
+  setSearchResults,
+  clearSearchResults,
 } = restaurantsSlice.actions;
 export default restaurantsSlice.reducer;

@@ -74,6 +74,19 @@ export interface RestaurantsState {
   nearbyItemsPerPage: number;
   bestSellers: Restaurant[];
   bestSellerPagination: RestaurantPagination;
+  searchResults: Restaurant[];
+  searchPagination: RestaurantPagination;
+  searchQuery: string;
+}
+
+export interface SearchRestaurantsResponse {
+  success: boolean;
+  message: string;
+  data: {
+    restaurants: Restaurant[];
+    pagination: RestaurantPagination;
+    searchQuery: string;
+  };
 }
 
 export interface NearbyState {

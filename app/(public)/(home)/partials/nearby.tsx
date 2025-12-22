@@ -54,7 +54,7 @@ const Nearby = () => {
   return (
     <div className="custom-container w-full pt-6 md:pt-0 flex flex-col gap-4 md:gap-8">
       <div className="flex-between gap-4">
-        <h2 className="font-extrabold text-display-xs md:text-display-md">Nearby</h2>
+        <h2 className="font-extrabold text-display-xs md:text-display-md">Nearby Restaurants</h2>
 
         <Link
           href="/restaurants"
