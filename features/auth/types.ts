@@ -37,6 +37,12 @@ export interface LoginResponse {
   };
 }
 
+export interface ProfileResponse {
+  success: boolean;
+  message: string;
+  data: User;
+}
+
 export interface AuthState {
   token: string | null;
   user: User | null;

@@ -1,6 +1,12 @@
 import { http } from '@/lib/api';
 import { API_AUTH_URL } from '@/features/shared/constants/api-url';
-import { RegisterPayload, RegisterResponse, LoginPayload, LoginResponse } from './types';
+import {
+  RegisterPayload,
+  RegisterResponse,
+  LoginPayload,
+  LoginResponse,
+  ProfileResponse,
+} from './types';
 
 export const authService = {
   register: async (payload: RegisterPayload): Promise<RegisterResponse> => {
@@ -9,5 +15,9 @@ export const authService = {
 
   login: async (payload: LoginPayload): Promise<LoginResponse> => {
     return http.post<LoginResponse>(`${API_AUTH_URL}/login`, payload);
+  },
+
+  getProfile: async (): Promise<ProfileResponse> => {
+    return http.get<ProfileResponse>(`${API_AUTH_URL}/profile`);
   },
 };
