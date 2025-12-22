@@ -15,30 +15,29 @@ import Link from 'next/link';
 import { useAddOrder } from '@/features/orders/hooks';
 import { useDeleteCart } from '@/features/cart/hooks';
 import { Transaction } from '@/features/orders/types';
+import { DELIVERY_FEE, SERVICE_FEE } from "@/features/checkout/constants/payment-fee-data";
 
 const CheckoutPage = () => {
-  const { user } = useAppSelector((state) => state.auth);
   const { cart, summary } = useAppSelector((state) => state.cart);
+  const { deliveryAddress } = useAppSelector((state) => state.checkout);
   const { mutate: addOrder, isPending: isOrdering } = useAddOrder();
   const { mutate: deleteCart } = useDeleteCart();
 
-  const [deliveryAddress, setDeliveryAddress] = useState(
-    'Jl. Sudirman No. 25, Jakarta Pusat, 10220'
-  );
-  const [notes, setNotes] = useState('Please ring the doorbell');
   const [paymentMethod, setPaymentMethod] = useState('Bank Negara Indonesia');
   const [transaction, setTransaction] = useState<Transaction | null>(null);
-
-  const DELIVERY_FEE = 10000;
-  const SERVICE_FEE = 1000;
 
   const totalPrice = useMemo(() => {
     return summary.totalPrice + DELIVERY_FEE + SERVICE_FEE;
   }, [summary.totalPrice]);
 
   const isDisabled = useMemo(() => {
-    return !deliveryAddress || !user?.phone || cart.length === 0 || !paymentMethod;
-  }, [deliveryAddress, user?.phone, cart.length, paymentMethod]);
+    return (
+      !deliveryAddress.address ||
+      !deliveryAddress.phone ||
+      cart.length === 0 ||
+      !paymentMethod
+    );
+  }, [deliveryAddress.address, deliveryAddress.phone, cart.length, paymentMethod]);
 
   const handleBuy = () => {
     if (isDisabled) return;
@@ -51,10 +50,10 @@ const CheckoutPage = () => {
           quantity: item.quantity,
         })),
       })),
-      deliveryAddress,
-      phone: user!.phone,
+      deliveryAddress: deliveryAddress.address,
+      phone: deliveryAddress.phone,
       paymentMethod,
-      notes,
+      notes: '',
     };
 
     addOrder(payload, {
@@ -94,9 +93,8 @@ const CheckoutPage = () => {
         main={
           <>
             <DeliveryAddress
-              address={deliveryAddress}
-              phone={user?.phone || ''}
-              onChangeAddress={setDeliveryAddress}
+              address={deliveryAddress.address}
+              phone={deliveryAddress.phone}
             />
             <CheckoutItems cartGroups={cart} />
           </>

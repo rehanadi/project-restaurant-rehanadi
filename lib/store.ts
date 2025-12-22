@@ -4,6 +4,7 @@ import locationReducer from '@/features/location/stores';
 import restaurantsReducer from '@/features/restaurants/stores';
 import cartReducer from '@/features/cart/stores';
 import ordersReducer from '@/features/orders/stores';
+import checkoutReducer from '@/features/checkout/stores';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     restaurants: restaurantsReducer,
     cart: cartReducer,
     orders: ordersReducer,
+    checkout: checkoutReducer,
   },
 });
 

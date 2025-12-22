@@ -7,3 +7,17 @@ export interface PaymentMethod {
     height: number;
   };
 }
+
+export interface DeliveryAddress {
+  address: string;
+  phone: string;
+}
+
+export interface CheckoutState {
+  deliveryAddress: DeliveryAddress;
+}
+
+export interface UpdateAddressPayload {
+  address: string;
+  phone: string;
+}
