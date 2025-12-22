@@ -5,6 +5,7 @@ import {
   RestaurantDetailResponse,
   GetRestaurantsResponse,
   GetRestaurantsParams,
+  BestSellerRestaurantsResponse,
 } from './types';
 import { buildQueryParams } from './utils';
 
@@ -26,5 +27,14 @@ export const restaurantsService = {
   getRestaurants: async (params: GetRestaurantsParams = {}): Promise<GetRestaurantsResponse> => {
     const queryString = buildQueryParams(params);
     return http.get<GetRestaurantsResponse>(`${API_RESTO_URL}?${queryString}`);
+  },
+
+  getBestSellerRestaurants: async (
+    page: number = 1,
+    limit: number = 6
+  ): Promise<BestSellerRestaurantsResponse> => {
+    return http.get<BestSellerRestaurantsResponse>(
+      `${API_RESTO_URL}/best-seller?page=${page}&limit=${limit}`
+    );
   },
 };

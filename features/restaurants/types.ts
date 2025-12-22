@@ -22,6 +22,7 @@ export interface Restaurant {
   reviewCount: number;
   sampleMenus: SampleMenu[];
   isFrequentlyOrdered: boolean;
+  distance?: number;
 }
 
 export interface RestaurantDetail {
@@ -68,6 +69,31 @@ export interface RestaurantsState {
   restaurants: Restaurant[];
   pagination: RestaurantPagination;
   filters: RestaurantFilters;
+  nearby: Restaurant[];
+  nearbyCurrentPage: number;
+  nearbyItemsPerPage: number;
+  bestSellers: Restaurant[];
+  bestSellerPagination: RestaurantPagination;
+}
+
+export interface NearbyState {
+  nearby: Restaurant[];
+  currentPage: number;
+  itemsPerPage: number;
+}
+
+export interface BestSellerState {
+  bestSellers: Restaurant[];
+  pagination: RestaurantPagination;
+}
+
+export interface BestSellerRestaurantsResponse {
+  success: boolean;
+  message: string;
+  data: {
+    restaurants: Restaurant[];
+    pagination: RestaurantPagination;
+  };
 }
 
 export interface RestaurantPagination {

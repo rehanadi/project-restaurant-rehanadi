@@ -28,6 +28,16 @@ const initialState: RestaurantsState = {
     rating: null,
     category: null,
   },
+  nearby: [],
+  nearbyCurrentPage: 1,
+  nearbyItemsPerPage: 6,
+  bestSellers: [],
+  bestSellerPagination: {
+    page: 1,
+    limit: 6,
+    total: 0,
+    totalPages: 0,
+  },
 };
 
 const restaurantsSlice = createSlice({
@@ -70,6 +80,35 @@ const restaurantsSlice = createSlice({
       state.pagination = action.payload.pagination;
       state.filters = action.payload.filters;
     },
+    setNearby: (state, action: PayloadAction<Restaurant[]>) => {
+      state.nearby = action.payload;
+      state.nearbyCurrentPage = 1;
+    },
+    loadMoreNearby: (state) => {
+      state.nearbyCurrentPage += 1;
+    },
+    resetNearby: (state) => {
+      state.nearbyCurrentPage = 1;
+    },
+    setBestSellers: (
+      state,
+      action: PayloadAction<{
+        restaurants: Restaurant[];
+        pagination: RestaurantPagination;
+      }>
+    ) => {
+      state.bestSellers = action.payload.restaurants;
+      state.bestSellerPagination = action.payload.pagination;
+    },
+    resetBestSellers: (state) => {
+      state.bestSellers = [];
+      state.bestSellerPagination = {
+        page: 1,
+        limit: 6,
+        total: 0,
+        totalPages: 0,
+      };
+    },
   },
 });
 
@@ -82,5 +121,10 @@ export const {
   loadMoreReviews,
   resetRestaurantDetail,
   setRestaurants,
+  setNearby,
+  loadMoreNearby,
+  resetNearby,
+  setBestSellers,
+  resetBestSellers,
 } = restaurantsSlice.actions;
 export default restaurantsSlice.reducer;

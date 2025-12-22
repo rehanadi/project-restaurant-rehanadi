@@ -1,7 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { restaurantsService } from './services';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { setRecommendations, setSelectedRestaurant, setRestaurants } from './stores';
+import {
+  setRecommendations,
+  setSelectedRestaurant,
+  setRestaurants,
+  setNearby,
+  setBestSellers,
+} from './stores';
 import { CACHE_DURATION } from '@/features/shared/constants/duration';
 import { GetRestaurantsParams } from './types';
 
@@ -13,6 +19,21 @@ export const useGetRecommendedRestaurants = () => {
     queryFn: async () => {
       const response = await restaurantsService.getRecommendedRestaurants();
       dispatch(setRecommendations(response.data.recommendations));
+      return response;
+    },
+    staleTime: CACHE_DURATION,
+    gcTime: CACHE_DURATION,
+  });
+};
+
+export const useGetNearbyRestaurants = () => {
+  const dispatch = useAppDispatch();
+
+  return useQuery({
+    queryKey: ['restaurants', 'nearby'],
+    queryFn: async () => {
+      const response = await restaurantsService.getRecommendedRestaurants();
+      dispatch(setNearby(response.data.recommendations));
       return response;
     },
     staleTime: CACHE_DURATION,
@@ -49,6 +70,27 @@ export const useGetRestaurants = (params: GetRestaurantsParams) => {
           restaurants: response.data.restaurants,
           pagination: response.data.pagination,
           filters: response.data.filters,
+        })
+      );
+      return response;
+    },
+    staleTime: CACHE_DURATION,
+    gcTime: CACHE_DURATION,
+    refetchOnMount: 'always',
+  });
+};
+
+export const useGetBestSellerRestaurants = (page: number = 1, limit: number = 6) => {
+  const dispatch = useAppDispatch();
+
+  return useQuery({
+    queryKey: ['restaurants', 'best-seller', page, limit],
+    queryFn: async () => {
+      const response = await restaurantsService.getBestSellerRestaurants(page, limit);
+      dispatch(
+        setBestSellers({
+          restaurants: response.data.restaurants,
+          pagination: response.data.pagination,
         })
       );
       return response;
