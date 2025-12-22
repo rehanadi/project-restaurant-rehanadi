@@ -20,6 +20,7 @@ export interface OrderMenuItem {
   menuId: number;
   menuName: string;
   price: number;
+  image: string;
   quantity: number;
   itemTotal: number;
 }
@@ -51,6 +52,7 @@ export interface Transaction {
   pricing: TransactionPricing;
   restaurants: OrderRestaurantDetail[];
   createdAt: string;
+  updatedAt: string;
 }
 
 export interface AddOrderResponse {
@@ -59,4 +61,32 @@ export interface AddOrderResponse {
   data: {
     transaction: Transaction;
   };
+}
+
+export interface Pagination {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}
+
+export interface Filter {
+  status: string;
+}
+
+export interface GetOrdersResponse {
+  success: boolean;
+  message: string;
+  data: {
+    orders: Transaction[];
+    pagination: Pagination;
+    filter: Filter;
+  };
+}
+
+export type OrderStatus = 'preparing' | 'on_the_way' | 'delivered' | 'done' | 'cancelled';
+
+export interface OrderStatusItem {
+  label: string;
+  value: OrderStatus;
 }

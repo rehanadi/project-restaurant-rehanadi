@@ -1,23 +1,23 @@
 import { Badge } from '@/components/ui/badge';
+import { OrderStatus } from '../types';
+import { orderStatusData } from '../constants/order-status';
 
 interface StatusTabsProps {
-  value: string;
-  onChange: (value: string) => void;
+  value: OrderStatus;
+  onChange: (value: OrderStatus) => void;
 }
 
 const StatusTabs = ({ value, onChange }: StatusTabsProps) => {
-  const statusTabs = ['Preparing', 'On the Way', 'Delivered', 'Done', 'Canceled'];
-
   return (
-    <div className='flex-start flex-wrap gap-2 md:gap-3'>
-      {statusTabs.map((tab) => (
+    <div className="flex-start flex-wrap gap-2 md:gap-3">
+      {orderStatusData.map((status) => (
         <Badge
-          key={tab}
-          variant={value === tab ? 'danger-rounded' : 'outline-rounded'}
-          className='cursor-pointer'
-          onClick={() => onChange(tab)}
+          key={status.value}
+          variant={value === status.value ? 'danger-rounded' : 'outline-rounded'}
+          className="cursor-pointer"
+          onClick={() => onChange(status.value)}
         >
-          {tab}
+          {status.label}
         </Badge>
       ))}
     </div>
