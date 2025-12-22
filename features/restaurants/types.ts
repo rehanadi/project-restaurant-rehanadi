@@ -65,4 +65,42 @@ export interface RestaurantsState {
   selectedRestaurant: RestaurantDetail | null;
   menuLimit: number;
   reviewLimit: number;
+  restaurants: Restaurant[];
+  pagination: RestaurantPagination;
+  filters: RestaurantFilters;
+}
+
+export interface RestaurantPagination {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}
+
+export interface RestaurantFilters {
+  range: number;
+  priceMin: number;
+  priceMax: number;
+  rating: number | null;
+  category: string | null;
+}
+
+export interface GetRestaurantsResponse {
+  success: boolean;
+  message: string;
+  data: {
+    restaurants: Restaurant[];
+    pagination: RestaurantPagination;
+    filters: RestaurantFilters;
+  };
+}
+
+export interface GetRestaurantsParams {
+  range?: number;
+  priceMin?: number;
+  priceMax?: number;
+  rating?: number;
+  category?: string;
+  page?: number;
+  limit?: number;
 }

@@ -1,25 +1,25 @@
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 
-const DistanceCheckbox = ({
-  label,
-  value,
-  checked = false,
-}: {
+interface DistanceCheckboxProps {
   label: string;
-  value: string;
+  value: number;
   checked: boolean;
-}) => {
+  onCheckedChange: (value: number) => void;
+}
+
+const DistanceCheckbox = ({ label, value, checked, onCheckedChange }: DistanceCheckboxProps) => {
+  const id = `distance-${value}`;
+
   return (
-    <div className='flex-start gap-2'>
+    <div className="flex-start gap-2" suppressHydrationWarning>
       <Checkbox
-        id={value}
+        id={id}
         checked={checked}
-        onCheckedChange={() => {}}
+        onCheckedChange={() => onCheckedChange(value)}
+        suppressHydrationWarning
       />
-      <Label htmlFor={value}>
-        {label}
-      </Label>
+      <Label htmlFor={id}>{label}</Label>
     </div>
   );
 };

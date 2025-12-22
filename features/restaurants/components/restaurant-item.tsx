@@ -5,9 +5,10 @@ import { Restaurant } from "../types";
 
 interface RestaurantItemProps {
   restaurant: Restaurant;
+  showDistance?: boolean;
 }
 
-const RestaurantItem = ({ restaurant }: RestaurantItemProps) => {
+const RestaurantItem = ({ restaurant, showDistance = false }: RestaurantItemProps) => {
   return (
     <Link href={`/restaurants/${restaurant.id}`}>
       <div className="shadow-light bg-white p-3 md:p-4 rounded-2xl flex-start gap-2 md:gap-3">
@@ -29,8 +30,12 @@ const RestaurantItem = ({ restaurant }: RestaurantItemProps) => {
 
           <div className="flex-start gap-1.5 text-sm md:text-md">
             <span>{restaurant.place}</span>
-            <div className="size-0.5 bg-neutral-950 rounded-full"></div>
-            <span>2.4 km</span>
+            {showDistance && (
+              <>
+                <div className="size-0.5 bg-neutral-950 rounded-full"></div>
+                <span>2.4 km</span>
+              </>
+            )}
           </div>
         </div>
       </div>

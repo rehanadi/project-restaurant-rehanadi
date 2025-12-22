@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { restaurantsService } from './services';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { setRecommendations, setSelectedRestaurant } from './stores';
+import { setRecommendations, setSelectedRestaurant, setRestaurants } from './stores';
 import { CACHE_DURATION } from '@/features/shared/constants/duration';
+import { GetRestaurantsParams } from './types';
 
 export const useGetRecommendedRestaurants = () => {
   const dispatch = useAppDispatch();
@@ -33,5 +34,27 @@ export const useGetRestaurant = (id: number) => {
     staleTime: CACHE_DURATION,
     gcTime: CACHE_DURATION,
     enabled: !!id,
+  });
+};
+
+export const useGetRestaurants = (params: GetRestaurantsParams) => {
+  const dispatch = useAppDispatch();
+
+  return useQuery({
+    queryKey: ['restaurants', 'list', params],
+    queryFn: async () => {
+      const response = await restaurantsService.getRestaurants(params);
+      dispatch(
+        setRestaurants({
+          restaurants: response.data.restaurants,
+          pagination: response.data.pagination,
+          filters: response.data.filters,
+        })
+      );
+      return response;
+    },
+    staleTime: CACHE_DURATION,
+    gcTime: CACHE_DURATION,
+    refetchOnMount: 'always',
   });
 };

@@ -1,13 +1,30 @@
 import { http } from '@/lib/api';
 import { API_RESTO_URL } from '@/features/shared/constants/api-url';
-import { RecommendedRestaurantsResponse, RestaurantDetailResponse } from './types';
+import {
+  RecommendedRestaurantsResponse,
+  RestaurantDetailResponse,
+  GetRestaurantsResponse,
+  GetRestaurantsParams,
+} from './types';
+import { buildQueryParams } from './utils';
 
 export const restaurantsService = {
   getRecommendedRestaurants: async (): Promise<RecommendedRestaurantsResponse> => {
     return http.get<RecommendedRestaurantsResponse>(`${API_RESTO_URL}/recommended`);
   },
 
-  getRestaurant: async (id: number, limitMenu: number, limitReview: number): Promise<RestaurantDetailResponse> => {
-    return http.get<RestaurantDetailResponse>(`${API_RESTO_URL}/${id}?limitMenu=${limitMenu}&limitReview=${limitReview}`);
+  getRestaurant: async (
+    id: number,
+    limitMenu: number,
+    limitReview: number
+  ): Promise<RestaurantDetailResponse> => {
+    return http.get<RestaurantDetailResponse>(
+      `${API_RESTO_URL}/${id}?limitMenu=${limitMenu}&limitReview=${limitReview}`
+    );
+  },
+
+  getRestaurants: async (params: GetRestaurantsParams = {}): Promise<GetRestaurantsResponse> => {
+    const queryString = buildQueryParams(params);
+    return http.get<GetRestaurantsResponse>(`${API_RESTO_URL}?${queryString}`);
   },
 };
