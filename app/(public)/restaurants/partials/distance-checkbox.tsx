@@ -5,21 +5,31 @@ interface DistanceCheckboxProps {
   label: string;
   value: number;
   checked: boolean;
-  onCheckedChange: (value: number) => void;
+  onCheckedChange: (value: number | undefined) => void;
 }
 
 const DistanceCheckbox = ({ label, value, checked, onCheckedChange }: DistanceCheckboxProps) => {
   const id = `distance-${value}`;
+
+  const handleChange = (isChecked: boolean | 'indeterminate') => {
+    if (isChecked === true) {
+      onCheckedChange(value);
+    } else {
+      onCheckedChange(undefined);
+    }
+  };
 
   return (
     <div className="flex-start gap-2" suppressHydrationWarning>
       <Checkbox
         id={id}
         checked={checked}
-        onCheckedChange={() => onCheckedChange(value)}
+        onCheckedChange={handleChange}
         suppressHydrationWarning
       />
-      <Label htmlFor={id}>{label}</Label>
+      <Label htmlFor={id} className="cursor-pointer">
+        {label}
+      </Label>
     </div>
   );
 };

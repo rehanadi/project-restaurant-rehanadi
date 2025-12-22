@@ -11,7 +11,7 @@ import { useGetRestaurants } from '@/features/restaurants/hooks';
 import { useDebounce } from '@/features/shared/hooks/use-debounce';
 
 const RestaurantsPage = () => {
-  const [range, setRange] = useState(0.5);
+  const [range, setRange] = useState<number | undefined>(0.5);
   const [priceMin, setPriceMin] = useState<number | undefined>(undefined);
   const [priceMax, setPriceMax] = useState<number | undefined>(undefined);
   const [rating, setRating] = useState<number | null>(null);
@@ -21,7 +21,7 @@ const RestaurantsPage = () => {
   const debouncedPriceMax = useDebounce(priceMax, 500);
 
   const { data, isLoading } = useGetRestaurants({
-    range,
+    range: range,
     priceMin: debouncedPriceMin,
     priceMax: debouncedPriceMax,
     rating: rating || undefined,

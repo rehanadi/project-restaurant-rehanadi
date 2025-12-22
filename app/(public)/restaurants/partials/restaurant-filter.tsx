@@ -16,25 +16,26 @@ import DistanceCheckbox from './distance-checkbox';
 import { locationDistances } from '@/features/location/constants/location-distance';
 
 interface RestaurantFilterProps {
-  range: number;
+  range: number | undefined;
   priceMin: number | undefined;
   priceMax: number | undefined;
   rating: number | null;
-  onRangeChange: (value: number) => void;
+  onRangeChange: (value: number | undefined) => void;
   onPriceMinChange: (value: number | undefined) => void;
   onPriceMaxChange: (value: number | undefined) => void;
   onRatingChange: (value: number | null) => void;
 }
 
 interface FilterContentProps {
-  range: number;
+  range: number | undefined;
   priceMin: number | undefined;
   priceMax: number | undefined;
   rating: number | null;
-  onRangeChange: (value: number) => void;
+  onRangeChange: (value: number | undefined) => void;
   onPriceMinChange: (value: number | undefined) => void;
   onPriceMaxChange: (value: number | undefined) => void;
   onRatingChange: (value: number | null) => void;
+  showTitle?: boolean;
 }
 
 const FilterContent = ({
@@ -46,6 +47,7 @@ const FilterContent = ({
   onPriceMinChange,
   onPriceMaxChange,
   onRatingChange,
+  showTitle = false,
 }: FilterContentProps) => {
   const handlePriceMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -72,9 +74,9 @@ const FilterContent = ({
   };
 
   return (
-    <div className="flex flex-col gap-6 py-4">
+    <div className="flex flex-col gap-6">
       <div className="px-4 flex flex-col gap-2.5">
-        <h3 className="uppercase font-extrabold text-md">Filter</h3>
+        {showTitle && <h3 className="uppercase font-extrabold text-md">Filter</h3>}
 
         <h4 className="font-extrabold text-lg">Distance</h4>
 
@@ -167,7 +169,7 @@ const RestaurantFilter = ({
           </div>
         </SheetTrigger>
 
-        <SheetContent side="left" className="w-[298px] p-4 overflow-y-auto scrollbar-thin">
+        <SheetContent side="left" className="w-[298px] px-4 py-8 overflow-y-auto scrollbar-thin">
           <FilterContent
             range={range}
             priceMin={priceMin}
@@ -177,12 +179,13 @@ const RestaurantFilter = ({
             onPriceMinChange={onPriceMinChange}
             onPriceMaxChange={onPriceMaxChange}
             onRatingChange={onRatingChange}
+            showTitle={true}
           />
         </SheetContent>
       </Sheet>
 
       {/* Desktop Filter */}
-      <div className="shrink-0 shadow-light bg-white hidden w-[266px] md:flex flex-col gap-6 py-4 rounded-xl">
+      <div className="shrink-0 shadow-light bg-white hidden w-[266px] md:flex flex-col py-4 rounded-xl">
         <FilterContent
           range={range}
           priceMin={priceMin}
@@ -192,6 +195,7 @@ const RestaurantFilter = ({
           onPriceMinChange={onPriceMinChange}
           onPriceMaxChange={onPriceMaxChange}
           onRatingChange={onRatingChange}
+          showTitle={true}
         />
       </div>
     </>
