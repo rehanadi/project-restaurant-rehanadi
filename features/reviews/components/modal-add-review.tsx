@@ -10,128 +10,138 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Icon } from '@iconify/react';
 import { cn } from '@/lib/utils';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { addReviewSchema, AddReviewFormData } from '../schemas';
+import { useAddReview } from '../hooks';
 
 interface ModalAddReviewProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onSubmit: (rating: number, comment: string) => void;
-  isSubmitting?: boolean;
+  transactionId: string;
+  restaurantId: number;
+  menuIds: number[];
 }
 
 const ModalAddReview = ({
   open,
   onOpenChange,
-  onSubmit,
-  isSubmitting = false,
+  transactionId,
+  restaurantId,
+  menuIds,
 }: ModalAddReviewProps) => {
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
-  const [errors, setErrors] = useState<{ rating?: string; comment?: string }>(
-    {}
-  );
+  const { mutate: addReview, isPending } = useAddReview();
 
-  const validateForm = () => {
-    const newErrors: { rating?: string; comment?: string } = {};
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setValue,
+    watch,
+  } = useForm<AddReviewFormData>({
+    resolver: zodResolver(addReviewSchema),
+    defaultValues: {
+      rating: 0,
+      comment: '',
+    },
+  });
 
-    if (rating === 0) {
-      newErrors.rating = 'Please select a rating';
-    }
+  const rating = watch('rating');
 
-    if (!comment.trim()) {
-      newErrors.comment = 'Comment is required';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = () => {
-    if (!validateForm()) return;
-    onSubmit(rating, comment);
+  const onSubmit = (data: AddReviewFormData) => {
+    addReview(
+      {
+        transactionId,
+        restaurantId,
+        star: data.rating,
+        comment: data.comment,
+        menuIds,
+      },
+      {
+        onSuccess: () => {
+          handleClose();
+        },
+      }
+    );
   };
 
   const handleClose = () => {
-    setRating(0);
-    setComment('');
-    setErrors({});
+    reset();
     onOpenChange(false);
   };
 
-  // Reset form when modal opens
   useEffect(() => {
     if (open) {
-      setRating(0);
-      setComment('');
-      setErrors({});
+      reset();
     }
-  }, [open]);
+  }, [open, reset]);
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className='max-w-[361px] md:max-w-[439px]'>
-        <DialogHeader className='-mt-1'>
+      <DialogContent className="max-w-[361px] md:max-w-[439px]">
+        <DialogHeader className="-mt-1">
           <DialogTitle>Give Review</DialogTitle>
         </DialogHeader>
 
-        <div className='flex flex-col gap-4 md:gap-6'>
-          <div className='flex flex-col items-center'>
-            <span className='font-extrabold text-md'>
-              Give Rating
-            </span>
-            <div className='flex gap-1'>
-              {Array.from({ length: 5 }).map((_, index) => (
-                <button
-                  key={index}
-                  type='button'
-                  onClick={() => {
-                    setRating(index + 1);
-                    setErrors((prev) => ({ ...prev, rating: undefined }));
-                  }}
-                  className='transition-transform hover:scale-110'
-                >
-                  <Icon
-                    icon='material-symbols:star-rounded'
-                    className={cn(
-                      'size-10 cursor-pointer md:size-12.25',
-                      index < rating ? 'text-yellow-500' : 'text-neutral-300'
-                    )}
-                  />
-                </button>
-              ))}
-            </div>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 md:gap-6">
+          <div className="flex flex-col items-center">
+            <span className="font-extrabold text-md">Give Rating</span>
+            <Controller
+              name="rating"
+              control={control}
+              render={({ field }) => (
+                <div className="flex gap-1">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      onClick={() => field.onChange(index + 1)}
+                      className="transition-transform hover:scale-110"
+                    >
+                      <Icon
+                        icon="material-symbols:star-rounded"
+                        className={cn(
+                          'size-10 cursor-pointer md:size-12.25',
+                          index < rating ? 'text-yellow-500' : 'text-neutral-300'
+                        )}
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
+            />
             {errors.rating && (
-              <span className='text-primary-100 md:text-md text-sm font-medium'>
-                {errors.rating}
+              <span className="text-primary-100 md:text-md text-sm font-medium">
+                {errors.rating.message}
               </span>
             )}
           </div>
 
-          <div className='flex flex-col gap-1'>
-            <Textarea
-              placeholder='Please share your thoughts about this book'
-              value={comment}
-              onChange={(e) => {
-                setComment(e.target.value);
-                setErrors((prev) => ({ ...prev, comment: undefined }));
-              }}
-              className='min-h-[235px] resize-none'
+          <div className="flex flex-col gap-1">
+            <Controller
+              name="comment"
+              control={control}
+              render={({ field }) => (
+                <Textarea
+                  {...field}
+                  placeholder="Please share your thoughts about our service!"
+                  className="min-h-[235px] resize-none"
+                />
+              )}
             />
             {errors.comment && (
-              <span className='text-primary-100 text-sm font-medium'>
-                {errors.comment}
+              <span className="text-primary-100 text-sm font-medium">
+                {errors.comment.message}
               </span>
             )}
           </div>
 
-          <Button
-            className='h-11 w-full md:h-12'
-            onClick={handleSubmit}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? 'Sending...' : 'Send'}
+          <Button type="submit" className="h-11 w-full md:h-12" disabled={isPending}>
+            {isPending ? 'Sending...' : 'Send'}
           </Button>
-        </div>
+        </form>
       </DialogContent>
     </Dialog>
   );
