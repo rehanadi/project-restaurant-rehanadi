@@ -2,7 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { cartService } from './services';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { setCart } from './stores';
+import { setCart, clearCart } from './stores';
 import { getErrorMessage } from '@/lib/api';
 import { CACHE_DURATION } from '@/features/shared/constants/duration';
 import { GetCartResponse } from './types';
@@ -38,7 +38,7 @@ export const useAddCartItem = () => {
       const previousCart = queryClient.getQueryData<GetCartResponse>(['cart']);
 
       if (previousCart) {
-        const newCart = { ...previousCart };
+        const newCart = structuredClone(previousCart);
         const restaurantIndex = newCart.data.cart.findIndex(
           (group) => group.restaurant.id === variables.restaurantId
         );
@@ -89,7 +89,7 @@ export const useUpdateCartItem = () => {
       const previousCart = queryClient.getQueryData<GetCartResponse>(['cart']);
 
       if (previousCart) {
-        const newCart = { ...previousCart };
+        const newCart = structuredClone(previousCart);
         
         for (const group of newCart.data.cart) {
           const itemIndex = group.items.findIndex((item) => item.id === variables.cartItemId);
@@ -147,7 +147,7 @@ export const useDeleteCartItem = () => {
       const previousCart = queryClient.getQueryData<GetCartResponse>(['cart']);
 
       if (previousCart) {
-        const newCart = { ...previousCart };
+        const newCart = structuredClone(previousCart);
         
         newCart.data.cart = newCart.data.cart
           .map((group) => ({
@@ -185,6 +185,22 @@ export const useDeleteCartItem = () => {
         queryClient.setQueryData(['cart'], context.previousCart);
         dispatch(setCart(context.previousCart.data));
       }
+      toast.error(getErrorMessage(error));
+    },
+  });
+};
+
+export const useDeleteCart = () => {
+  const queryClient = useQueryClient();
+  const dispatch = useAppDispatch();
+
+  return useMutation({
+    mutationFn: cartService.deleteCart,
+    onSuccess: () => {
+      dispatch(clearCart());
+      queryClient.invalidateQueries({ queryKey: ['cart'] });
+    },
+    onError: (error) => {
       toast.error(getErrorMessage(error));
     },
   });

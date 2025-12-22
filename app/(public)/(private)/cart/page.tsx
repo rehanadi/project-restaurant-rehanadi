@@ -31,7 +31,7 @@ const CartPage = () => {
           <p className="text-lg md:text-xl font-semibold text-neutral-600">
             Your cart is empty
           </p>
-          <Button asChild>
+          <Button asChild className="px-6">
             <Link href="/restaurants">Browse Restaurants</Link>
           </Button>
         </div>

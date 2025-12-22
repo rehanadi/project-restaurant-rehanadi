@@ -7,6 +7,7 @@ import {
   UpdateCartItemPayload,
   UpdateCartItemResponse,
   DeleteCartItemResponse,
+  DeleteCartResponse,
 } from './types';
 
 export const cartService = {
@@ -27,5 +28,9 @@ export const cartService = {
 
   deleteCartItem: async (cartItemId: number): Promise<DeleteCartItemResponse> => {
     return http.delete<DeleteCartItemResponse>(`${API_CART_URL}/${cartItemId}`);
+  },
+
+  deleteCart: async (): Promise<DeleteCartResponse> => {
+    return http.delete<DeleteCartResponse>(API_CART_URL);
   },
 };

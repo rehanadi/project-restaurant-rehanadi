@@ -72,6 +72,12 @@ export interface DeleteCartItemResponse {
   data: null;
 }
 
+export interface DeleteCartResponse {
+  success: boolean;
+  message: string;
+  data: null;
+}
+
 export interface CartState {
   cart: CartGroup[];
   summary: CartSummary;

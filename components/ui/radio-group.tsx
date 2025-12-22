@@ -27,7 +27,7 @@ function RadioGroupItem({
     <RadioGroupPrimitive.Item
       data-slot='radio-group-item'
       className={cn(
-        'aspect-square size-6 shrink-0 rounded-full transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50',
+        'aspect-square size-6 shrink-0 rounded-full cursor-pointer transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50',
         "bg-[url('/icons/radio-default.svg')] bg-contain bg-center bg-no-repeat",
         "data-[state=checked]:bg-[url('/icons/radio-checked.svg')]",
         'focus-visible:ring-ring/50 focus-visible:ring-[3px]',

@@ -9,7 +9,7 @@ import { useUpdateCartItem, useDeleteCartItem } from '../hooks';
 
 interface CartMenuItemProps {
   cartItem: CartItem;
-  onUpdate: () => void;
+  onUpdate?: () => void;
 }
 
 const CartMenuItem = ({ cartItem, onUpdate }: CartMenuItemProps) => {
@@ -24,7 +24,7 @@ const CartMenuItem = ({ cartItem, onUpdate }: CartMenuItemProps) => {
       },
       {
         onSuccess: () => {
-          onUpdate();
+          onUpdate?.();
         },
       }
     );
@@ -34,7 +34,7 @@ const CartMenuItem = ({ cartItem, onUpdate }: CartMenuItemProps) => {
     if (cartItem.quantity === 1) {
       deleteCartItem(cartItem.id, {
         onSuccess: () => {
-          onUpdate();
+          onUpdate?.();
         },
       });
     } else {
@@ -45,7 +45,7 @@ const CartMenuItem = ({ cartItem, onUpdate }: CartMenuItemProps) => {
         },
         {
           onSuccess: () => {
-            onUpdate();
+            onUpdate?.();
           },
         }
       );

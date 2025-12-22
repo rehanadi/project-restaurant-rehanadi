@@ -3,7 +3,7 @@ import { PaymentMethod } from "../types";
 export const paymentMethodData: PaymentMethod[] = [
   {
     label: "Bank Negara Indonesia",
-    value: "bni",
+    value: "Bank Negara Indonesia",
     image: {
       src: "/images/payment-methods/bni.png",
       width: 29.63,
@@ -12,7 +12,7 @@ export const paymentMethodData: PaymentMethod[] = [
   },
   {
     label: "Bank Rakyat Indonesia",
-    value: "bri",
+    value: "Bank Rakyat Indonesia",
     image: {
       src: "/images/payment-methods/bri.png",
       width: 29.63,
@@ -21,7 +21,7 @@ export const paymentMethodData: PaymentMethod[] = [
   },
   {
     label: "Bank Central Asia",
-    value: "bca",
+    value: "Bank Central Asia",
     image: {
       src: "/images/payment-methods/bca.png",
       width: 29.63,
@@ -30,7 +30,7 @@ export const paymentMethodData: PaymentMethod[] = [
   },
   {
     label: "Mandiri",
-    value: "mandiri",
+    value: "Mandiri",
     image: {
       src: "/images/payment-methods/mandiri.png",
       width: 29.63,
