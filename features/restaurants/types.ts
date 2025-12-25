@@ -77,6 +77,9 @@ export interface RestaurantsState {
   searchResults: Restaurant[];
   searchPagination: RestaurantPagination;
   searchQuery: string;
+  categoryRestaurants: Restaurant[];
+  categoryPagination: RestaurantPagination;
+  selectedCategory: string | null;
 }
 
 export interface SearchRestaurantsResponse {

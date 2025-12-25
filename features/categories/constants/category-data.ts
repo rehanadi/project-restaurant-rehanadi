@@ -13,8 +13,8 @@ export const categoryData: Category[] = [
   },
   {
     id: 3,
-    name: 'Discount',
-    image: '/icons/categories/discount.svg',
+    name: 'Category',
+    image: '/icons/categories/category.svg',
   },
   {
     id: 4,

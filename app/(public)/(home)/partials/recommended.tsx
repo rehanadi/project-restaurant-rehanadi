@@ -9,9 +9,9 @@ import { useGetRecommendedRestaurants } from '@/features/restaurants/hooks';
 import { useAppSelector, useAppDispatch } from '@/lib/hooks';
 import { loadMore } from '@/features/restaurants/stores';
 import { useMemo } from 'react';
+import { LIMIT } from "@/features/restaurants/constants/restaurant-filters";
 
 const Recommended = () => {
-  const LIMIT = 6;
   const dispatch = useAppDispatch();
   const { isLoading } = useGetRecommendedRestaurants();
   const { recommendations, currentPage, itemsPerPage } = useAppSelector(

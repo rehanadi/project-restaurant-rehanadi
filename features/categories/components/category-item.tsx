@@ -12,7 +12,7 @@ const CategoryItem = ({ category, isActive = false, onClick }: CategoryItemProps
   return (
     <div
       className={cn(
-        'flex-1 basis-[106px] flex flex-col rounded-2xl items-center gap-1 cursor-pointer transition-colors',
+        'flex-1 basis-[106px] p-1 flex flex-col rounded-2xl items-center gap-1 cursor-pointer transition-colors',
         isActive ? 'bg-primary-100 text-neutral-25' : 'hover:bg-primary-100 hover:text-neutral-25'
       )}
       onClick={onClick}

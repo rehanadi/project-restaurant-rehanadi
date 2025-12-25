@@ -12,7 +12,7 @@ const buttonVariants = cva(
         default:
           'bg-primary-100 font-bold text-sm md:text-md text-white rounded-full hover:opacity-80 transition-colors',
         outline:
-          'bg-white font-bold text-sm md:text-md border border-neutral-300 text-neutral-950 rounded-full hover:bg-neutral-100 transition-colors',
+          'bg-white font-bold text-sm md:text-md border border-neutral-300 text-neutral-950 rounded-full hover:bg-neutral-200 transition-colors',
         danger:
           'bg-white font-bold text-sm md:text-md border border-neutral-300 text-danger-500 rounded-full hover:bg-neutral-100 transition-colors',
         secondary:

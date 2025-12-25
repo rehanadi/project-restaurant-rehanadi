@@ -8,6 +8,7 @@ import {
   setNearby,
   setBestSellers,
   setSearchResults,
+  setCategoryRestaurants,
 } from './stores';
 import { CACHE_DURATION } from '@/features/shared/constants/duration';
 import { GetRestaurantsParams } from './types';
@@ -121,5 +122,30 @@ export const useGetSearchRestaurants = (query: string, page: number = 1, limit: 
     enabled: !!query && query.trim().length > 0,
     staleTime: CACHE_DURATION,
     gcTime: CACHE_DURATION,
+  });
+};
+
+export const useGetCategoryRestaurants = (category: string, page: number = 1, limit: number = 6) => {
+  const dispatch = useAppDispatch();
+
+  return useQuery({
+    queryKey: ['restaurants', 'category', category, page, limit],
+    queryFn: async () => {
+      const response = await restaurantsService.getRestaurants({
+        category,
+        page,
+        limit,
+      });
+      dispatch(
+        setCategoryRestaurants({
+          restaurants: response.data.restaurants,
+          pagination: response.data.pagination,
+        })
+      );
+      return response;
+    },
+    enabled: !!category && category.trim().length > 0,
+    staleTime: 1000,
+    refetchOnMount: true,
   });
 };

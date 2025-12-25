@@ -8,9 +8,9 @@ import RestaurantSkeleton from '@/features/restaurants/components/restaurant-ske
 import { Button } from '@/components/ui/button';
 import { useGetBestSellerRestaurants } from '@/features/restaurants/hooks';
 import { useAppSelector } from '@/lib/hooks';
+import { LIMIT } from "@/features/restaurants/constants/restaurant-filters";
 
 const BestSeller = () => {
-  const LIMIT = 6;
   const [page, setPage] = useState(1);
   const { isLoading } = useGetBestSellerRestaurants(page, LIMIT);
   const { bestSellers, bestSellerPagination } = useAppSelector((state) => state.restaurants);

@@ -10,9 +10,9 @@ import { useGetNearbyRestaurants } from '@/features/restaurants/hooks';
 import { useAppSelector, useAppDispatch } from '@/lib/hooks';
 import { loadMoreNearby } from '@/features/restaurants/stores';
 import { sortRestaurantsByDistance } from '@/features/restaurants/utils';
+import { LIMIT } from "@/features/restaurants/constants/restaurant-filters";
 
 const Nearby = () => {
-  const LIMIT = 6;
   const dispatch = useAppDispatch();
   const { isLoading } = useGetNearbyRestaurants();
   const { nearby, nearbyCurrentPage, nearbyItemsPerPage } = useAppSelector(

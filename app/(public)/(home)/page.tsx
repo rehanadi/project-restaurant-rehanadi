@@ -11,6 +11,7 @@ import Recommended from './partials/recommended';
 import Nearby from './partials/nearby';
 import BestSeller from './partials/best-seller';
 import SearchResults from './partials/search-results';
+import RestaurantCategory from "./partials/restaurant-category";
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -35,6 +36,8 @@ const Home = () => {
     switch (selectedCategory) {
       case 'Nearby':
         return <Nearby />;
+      case 'Category':
+        return <RestaurantCategory />;
       case 'Best Seller':
         return <BestSeller />;
       default:

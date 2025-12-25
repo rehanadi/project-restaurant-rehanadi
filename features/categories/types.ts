@@ -3,3 +3,8 @@ export interface Category {
   name: string;
   image: string;
 }
+
+export interface RestaurantCategory {
+  id: number;
+  name: string;
+}
