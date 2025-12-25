@@ -60,7 +60,7 @@ const RestaurantCategory = () => {
 
   return (
     <div className="custom-container w-full pt-6 md:pt-0 flex flex-col gap-4 md:gap-8">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 pb-3 md:pb-6">
         <Label className="self-start">Select Category</Label>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-5">
