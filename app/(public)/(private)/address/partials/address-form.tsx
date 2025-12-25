@@ -84,7 +84,7 @@ const AddressForm = () => {
 
           <Input
             id="phone"
-            type="text"
+            type="number"
             {...register('phone')}
             className="w-full h-12 md:h-14 px-3 border-neutral-300 rounded-xl md:rounded-lg text-sm placeholder:text-neutral-500"
             placeholder="Enter your phone number"
@@ -97,7 +97,7 @@ const AddressForm = () => {
       </div>
 
       <Button type="submit" className="w-full h-11 md:h-11">
-        Submit
+        Save
       </Button>
     </form>
   );

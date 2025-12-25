@@ -3,7 +3,7 @@ import React from 'react';
 
 type SectionProps = {
   children: React.ReactNode;
-  title?: string;
+  title?: string | React.ReactNode;
   id?: string;
   className?: string;
 };
@@ -23,9 +23,15 @@ export const Section = ({
       id={id}
     >
       {title && (
-        <h1 className="font-extrabold text-display-xs md:text-display-md">
-          {title}
-        </h1>
+        <>
+          {typeof title === 'string' ? (
+            <h1 className="font-extrabold text-display-xs md:text-display-md">
+              {title}
+            </h1>
+          ) : (
+            <>{title}</>
+          )}
+        </>
       )}
 
       <div>

@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
 import ProfileItem from './profile-item';
 import { useAppSelector } from '@/lib/hooks';
+import Link from "next/link";
 
 const ProfileInfo = () => {
   const { user } = useAppSelector((state) => state.auth);
@@ -22,7 +23,11 @@ const ProfileInfo = () => {
         <ProfileItem label="Nomor Handphone" value={user?.phone || '-'} />
       </div>
 
-      <Button className="w-full h-11 md:h-11">Update Profile</Button>
+      <Button className="w-full h-11 md:h-11" asChild>
+        <Link href="/profile/edit">
+          Update Profile
+        </Link>
+      </Button>
     </div>
   );
 };
