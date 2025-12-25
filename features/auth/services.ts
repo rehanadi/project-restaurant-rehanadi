@@ -6,6 +6,8 @@ import {
   LoginPayload,
   LoginResponse,
   ProfileResponse,
+  UpdateProfilePayload,
+  UpdateProfileResponse,
 } from './types';
 
 export const authService = {
@@ -19,5 +21,20 @@ export const authService = {
 
   getProfile: async (): Promise<ProfileResponse> => {
     return http.get<ProfileResponse>(`${API_AUTH_URL}/profile`);
+  },
+
+  updateProfile: async (payload: UpdateProfilePayload): Promise<UpdateProfileResponse> => {
+    const formData = new FormData();
+    formData.append('name', payload.name);
+    formData.append('phone', payload.phone);
+    if (payload.avatar) {
+      formData.append('avatar', payload.avatar);
+    }
+
+    return http.put<UpdateProfileResponse>(`${API_AUTH_URL}/profile`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
   },
 };

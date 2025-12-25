@@ -1,8 +1,8 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { authService } from './services';
-import { RegisterPayload, LoginPayload } from './types';
+import { RegisterPayload, LoginPayload, UpdateProfilePayload } from './types';
 import { getErrorMessage } from '@/lib/api';
 import { useAppDispatch } from '@/lib/hooks';
 import { setCredentials, setUser } from './stores';
@@ -60,5 +60,28 @@ export const useGetProfile = () => {
     gcTime: CACHE_DURATION,
     refetchOnMount: 'always',
     retry: 1,
+  });
+};
+
+export const useUpdateProfile = () => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (payload: UpdateProfilePayload) => authService.updateProfile(payload),
+    onSuccess: (data) => {
+      dispatch(setUser(data.data));
+      
+      // Invalidate and refetch profile query
+      queryClient.invalidateQueries({ queryKey: ['auth', 'profile'] });
+      queryClient.refetchQueries({ queryKey: ['auth', 'profile'] });
+
+      toast.success('Profile updated successfully');
+      router.push('/profile');
+    },
+    onError: (error) => {
+      toast.error(getErrorMessage(error));
+    },
   });
 };

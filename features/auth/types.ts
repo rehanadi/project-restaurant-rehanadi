@@ -10,6 +10,12 @@ export interface LoginPayload {
   password: string;
 }
 
+export interface UpdateProfilePayload {
+  name: string;
+  phone: string;
+  avatar?: File | null;
+}
+
 export interface User {
   id: number;
   name: string;
@@ -38,6 +44,12 @@ export interface LoginResponse {
 }
 
 export interface ProfileResponse {
+  success: boolean;
+  message: string;
+  data: User;
+}
+
+export interface UpdateProfileResponse {
   success: boolean;
   message: string;
   data: User;
